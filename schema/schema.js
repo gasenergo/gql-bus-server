@@ -85,6 +85,13 @@ const Mutation = new GraphQLObjectType({
                 return bus.save();
             }
         },
+        deleteBus: {
+            type: BusType,
+            args: { id: {type: GraphQLID} },
+            resolve(parent, args){
+                return Bus.findByIdAndRemove(args.id)
+            }
+        },
         addPassenger: {
             type: PassengerType,
             args: {
@@ -102,7 +109,14 @@ const Mutation = new GraphQLObjectType({
                 });
                 return passenger.save();
             }
-        }
+        },
+        deletePassenger: {
+            type: PassengerType,
+            args: { id: {type: GraphQLID} },
+            resolve(parent, args){
+                return Passenger.findByIdAndRemove(args.id)
+            }
+        },
     }
 });
 
